@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FreshNest Cleaning – A Fresher Home, A Better Life</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Nunito:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #1a2d5a;
+    --blue: #2a7fba;
+    --sky: #4db8e8;
+    --green: #3a8c2f;
+    --lime: #5cb85c;
+    --white: #ffffff;
+    --off: #f4f9f4;
+    --gray: #6c7a8a;
+    --light: #e8f4e8;
+    --shadow: 0 8px 32px rgba(26,45,90,0.10);
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body { font-family:'Nunito',sans-serif; color:var(--navy); background:var(--white); }
+
+  /* NAV */
+  nav {
+    position:fixed; top:0; left:0; right:0; z-index:100;
+    background:rgba(255,255,255,0.97);
+    backdrop-filter:blur(12px);
+    box-shadow:0 2px 20px rgba(26,45,90,0.08);
+    display:flex; align-items:center; justify-content:space-between;
+    padding:0 5%; height:70px;
+  }
+  .nav-logo { display:flex; align-items:center; gap:10px; }
+  .nav-logo img { height:48px; }
+  .nav-logo span { font-family:'Playfair Display',serif; font-size:1.3rem; color:var(--navy); font-weight:700; }
+  .nav-links { display:flex; gap:28px; align-items:center; }
+  .nav-links a { text-decoration:none; color:var(--navy); font-weight:600; font-size:.93rem; transition:.2s; }
+  .nav-links a:hover { color:var(--blue); }
+  .lang-btn {
+    background:var(--light); border:2px solid var(--green); color:var(--green);
+    padding:5px 14px; border-radius:20px; font-weight:700; font-size:.85rem;
+    cursor:pointer; transition:.2s;
+  }
+  .lang-btn:hover { background:var(--green); color:white; }
+  .nav-cta {
+    background:linear-gradient(135deg,var(--blue),var(--navy));
+    color:white; padding:9px 22px; border-radius:25px;
+    text-decoration:none; font-weight:700; font-size:.9rem;
+    box-shadow:0 4px 14px rgba(42,127,186,0.35); transition:.2s;
+  }
+  .nav-cta:hover { transform:translateY(-2px); box-shadow:0 6px 20px rgba(42,127,186,0.45); }
+
+  /* HERO */
+  .hero {
+    min-height:100vh;
+    background: linear-gradient(135deg, #e8f4f8 0%, #f0f8ee 50%, #e4f0ff 100%);
+    display:flex; align-items:center; padding:90px 5% 60px;
+    position:relative; overflow:hidden;
+  }
+  .hero::before {
+    content:''; position:absolute; top:-80px; right:-80px;
+    width:500px; height:500px;
+    background:radial-gradient(circle, rgba(77,184,232,0.15), transparent 70%);
+    border-radius:50%;
+  }
+  .hero::after {
+    content:''; position:absolute; bottom:-60px; left:-60px;
+    width:400px; height:400px;
+    background:radial-gradient(circle, rgba(92,184,92,0.12), transparent 70%);
+    border-radius:50%;
+  }
+  .hero-content { flex:1; max-width:600px; position:relative; z-index:2; }
+  .hero-badge {
+    display:inline-flex; align-items:center; gap:8px;
+    background:white; border:2px solid var(--lime);
+    padding:6px 16px; border-radius:20px; font-size:.82rem;
+    font-weight:700; color:var(--green); margin-bottom:24px;
+    box-shadow:0 2px 12px rgba(58,140,47,0.12);
+  }
+  .hero h1 {
+    font-family:'Playfair Display',serif;
+    font-size:clamp(2.2rem,4.5vw,3.5rem);
+    line-height:1.15; color:var(--navy); margin-bottom:18px;
+  }
+  .hero h1 span { color:var(--green); }
+  .hero p { font-size:1.08rem; color:var(--gray); line-height:1.7; margin-bottom:32px; }
+  .hero-btns { display:flex; gap:16px; flex-wrap:wrap; }
+  .btn-primary {
+    background:linear-gradient(135deg,var(--green),var(--lime));
+    color:white; padding:14px 32px; border-radius:30px;
+    text-decoration:none; font-weight:700; font-size:1rem;
+    box-shadow:0 6px 20px rgba(58,140,47,0.35); transition:.25s;
+    display:inline-flex; align-items:center; gap:8px;
+  }
+  .btn-primary:hover { transform:translateY(-3px); box-shadow:0 10px 28px rgba(58,140,47,0.45); }
+  .btn-secondary {
+    background:white; color:var(--navy); padding:14px 32px; border-radius:30px;
+    text-decoration:none; font-weight:700; font-size:1rem;
+    border:2px solid var(--navy); transition:.25s;
+    display:inline-flex; align-items:center; gap:8px;
+  }
+  .btn-secondary:hover { background:var(--navy); color:white; }
+  .hero-visual { flex:1; display:flex; justify-content:center; align-items:center; position:relative; z-index:2; }
+  .hero-logo-wrap {
+    background:white; border-radius:50%; padding:40px;
+    box-shadow:0 20px 60px rgba(26,45,90,0.12), 0 0 0 20px rgba(255,255,255,0.5);
+    animation:float 5s ease-in-out infinite;
+  }
+  .hero-logo-wrap img { width:260px; height:260px; object-fit:contain; }
+  @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-16px)} }
+  .trust-bar {
+    display:flex; gap:32px; margin-top:40px; flex-wrap:wrap;
+  }
+  .trust-item { display:flex; align-items:center; gap:8px; font-size:.88rem; font-weight:600; color:var(--gray); }
+  .trust-icon { font-size:1.2rem; }
+
+  /* SECTION SHARED */
+  section { padding:80px 5%; }
+  .section-tag {
+    display:inline-block; background:var(--light); color:var(--green);
+    font-weight:700; font-size:.8rem; padding:5px 14px; border-radius:20px;
+    text-transform:uppercase; letter-spacing:.05em; margin-bottom:12px;
+  }
+  .section-title {
+    font-family:'Playfair Display',serif;
+    font-size:clamp(1.8rem,3vw,2.6rem); color:var(--navy); margin-bottom:14px;
+  }
+  .section-sub { color:var(--gray); font-size:1rem; line-height:1.7; max-width:600px; }
+  .section-header { margin-bottom:48px; }
+
+  /* SERVICES */
+  #diensten { background:var(--off); }
+  .services-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(270px,1fr)); gap:24px; }
+  .service-card {
+    background:white; border-radius:20px; padding:32px 28px;
+    box-shadow:var(--shadow); transition:.3s; cursor:pointer;
+    border:2px solid transparent; position:relative; overflow:hidden;
+  }
+  .service-card::before {
+    content:''; position:absolute; top:0; left:0; right:0; height:4px;
+    background:linear-gradient(90deg,var(--blue),var(--green));
+    transform:scaleX(0); transition:.3s; transform-origin:left;
+  }
+  .service-card:hover { transform:translateY(-6px); border-color:var(--light); box-shadow:0 16px 48px rgba(26,45,90,0.14); }
+  .service-card:hover::before { transform:scaleX(1); }
+  .service-icon { font-size:2.6rem; margin-bottom:16px; }
+  .service-card h3 { font-family:'Playfair Display',serif; font-size:1.25rem; color:var(--navy); margin-bottom:10px; }
+  .service-card p { color:var(--gray); font-size:.92rem; line-height:1.65; }
+  .service-badge {
+    display:inline-block; margin-top:14px;
+    background:var(--light); color:var(--green);
+    font-size:.78rem; font-weight:700; padding:4px 12px; border-radius:12px;
+  }
+
+  /* WHY US */
+  .why-grid { display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:center; }
+  .why-visual {
+    background:linear-gradient(135deg,var(--light),#e4f0ff);
+    border-radius:24px; padding:48px; text-align:center;
+    box-shadow:var(--shadow);
+  }
+  .why-visual img { width:220px; }
+  .why-list { display:flex; flex-direction:column; gap:20px; }
+  .why-item { display:flex; gap:16px; align-items:flex-start; }
+  .why-num {
+    width:44px; height:44px; border-radius:12px; flex-shrink:0;
+    background:linear-gradient(135deg,var(--blue),var(--navy));
+    color:white; font-weight:900; font-size:1.1rem;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .why-item h4 { font-size:1rem; font-weight:700; color:var(--navy); margin-bottom:4px; }
+  .why-item p { font-size:.9rem; color:var(--gray); line-height:1.6; }
+
+  /* BOOKING FORM */
+  #boeken { background:linear-gradient(135deg,var(--navy),#0f1d3a); color:white; }
+  #boeken .section-title { color:white; }
+  #boeken .section-sub { color:rgba(255,255,255,0.65); }
+  #boeken .section-tag { background:rgba(255,255,255,0.1); color:var(--sky); }
+  .form-wrap {
+    background:white; border-radius:28px; padding:48px;
+    box-shadow:0 24px 80px rgba(0,0,0,0.25);
+  }
+  .form-grid { display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+  .form-group { display:flex; flex-direction:column; gap:8px; }
+  .form-group.full { grid-column:1/-1; }
+  .form-group label { font-size:.88rem; font-weight:700; color:var(--navy); }
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    border:2px solid #e0e8f0; border-radius:12px;
+    padding:12px 16px; font-family:'Nunito',sans-serif;
+    font-size:.95rem; color:var(--navy); transition:.2s;
+    background:#fafcff;
+  }
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus {
+    outline:none; border-color:var(--blue);
+    box-shadow:0 0 0 4px rgba(42,127,186,0.1);
+  }
+  .form-group textarea { resize:vertical; min-height:100px; }
+  .upload-area {
+    border:2px dashed var(--blue); border-radius:12px;
+    padding:28px; text-align:center; cursor:pointer;
+    background:#fafcff; transition:.2s; position:relative;
+  }
+  .upload-area:hover { background:var(--light); border-color:var(--green); }
+  .upload-area input { position:absolute; inset:0; opacity:0; cursor:pointer; }
+  .upload-icon { font-size:2rem; margin-bottom:8px; }
+  .upload-area p { font-size:.88rem; color:var(--gray); }
+  .upload-area strong { color:var(--blue); }
+  #file-preview { display:flex; flex-wrap:wrap; gap:8px; margin-top:12px; }
+  .file-thumb {
+    width:60px; height:60px; border-radius:8px; object-fit:cover;
+    border:2px solid var(--light);
+  }
+  .submit-btn {
+    width:100%; padding:16px; border-radius:14px; border:none;
+    background:linear-gradient(135deg,var(--green),var(--blue));
+    color:white; font-family:'Nunito',sans-serif; font-size:1.05rem;
+    font-weight:700; cursor:pointer; transition:.25s;
+    box-shadow:0 6px 24px rgba(58,140,47,0.3); margin-top:8px;
+  }
+  .submit-btn:hover { transform:translateY(-2px); box-shadow:0 10px 30px rgba(58,140,47,0.4); }
+  .form-success {
+    display:none; text-align:center; padding:40px 20px;
+  }
+  .form-success .tick { font-size:4rem; margin-bottom:16px; }
+  .form-success h3 { font-family:'Playfair Display',serif; font-size:1.8rem; color:var(--green); margin-bottom:10px; }
+  .form-success p { color:var(--gray); }
+
+  /* FOOTER */
+  footer {
+    background:var(--navy); color:rgba(255,255,255,0.75);
+    padding:60px 5% 32px;
+  }
+  .footer-grid { display:grid; grid-template-columns:2fr 1fr 1fr 1fr; gap:40px; margin-bottom:48px; }
+  .footer-brand img { height:70px; margin-bottom:16px; }
+  .footer-brand p { font-size:.9rem; line-height:1.7; }
+  footer h4 { color:white; font-size:1rem; margin-bottom:16px; font-weight:700; }
+  footer ul { list-style:none; display:flex; flex-direction:column; gap:10px; }
+  footer ul li a { color:rgba(255,255,255,0.65); text-decoration:none; font-size:.9rem; transition:.2s; }
+  footer ul li a:hover { color:var(--sky); }
+  .footer-bottom { border-top:1px solid rgba(255,255,255,0.1); padding-top:24px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; }
+  .footer-bottom p { font-size:.85rem; }
+  .social-links { display:flex; gap:12px; }
+  .social-links a {
+    width:36px; height:36px; border-radius:50%;
+    background:rgba(255,255,255,0.1);
+    display:flex; align-items:center; justify-content:center;
+    color:white; text-decoration:none; font-size:1rem; transition:.2s;
+  }
+  .social-links a:hover { background:var(--blue); }
+
+  /* TOAST */
+  #toast {
+    position:fixed; bottom:30px; right:30px; z-index:9999;
+    background:var(--green); color:white; padding:14px 24px;
+    border-radius:14px; font-weight:700; font-size:.95rem;
+    box-shadow:0 8px 30px rgba(0,0,0,0.2);
+    transform:translateY(80px); opacity:0; transition:.4s;
+  }
+  #toast.show { transform:translateY(0); opacity:1; }
+
+  /* RESPONSIVE */
+  @media(max-width:900px) {
+    .hero { flex-direction:column; text-align:center; }
+    .hero-btns { justify-content:center; }
+    .trust-bar { justify-content:center; }
+    .why-grid { grid-template-columns:1fr; }
+    .why-visual { display:none; }
+    .form-grid { grid-template-columns:1fr; }
+    .footer-grid { grid-template-columns:1fr 1fr; }
+    .nav-links { display:none; }
+  }
+  @media(max-width:600px) {
+    nav { padding:0 4%; }
+    .form-wrap { padding:28px 20px; }
+    .footer-grid { grid-template-columns:1fr; }
+    .hero-logo-wrap { display:none; }
+  }
+
+  /* LANG HIDDEN */
+  [data-en] { display:none; }
+  body.english [data-nl] { display:none; }
+  body.english [data-en] { display:block; }
+  body.english span[data-nl] { display:none; }
+  body.english span[data-en] { display:inline; }
+  span[data-en] { display:none; }
+
+  /* STATS */
+  .stats-bar {
+    background:white; padding:40px 5%; display:flex; justify-content:center;
+    gap:60px; flex-wrap:wrap; box-shadow:var(--shadow);
+  }
+  .stat { text-align:center; }
+  .stat-num { font-family:'Playfair Display',serif; font-size:2.5rem; color:var(--navy); font-weight:900; }
+  .stat-label { font-size:.85rem; color:var(--gray); font-weight:600; margin-top:4px; }
+
+  /* TESTIMONIALS */
+  #reviews { background:var(--off); }
+  .reviews-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:24px; }
+  .review-card {
+    background:white; border-radius:20px; padding:28px;
+    box-shadow:var(--shadow); position:relative;
+  }
+  .stars { color:#f5a623; font-size:1.1rem; margin-bottom:12px; }
+  .review-card p { color:var(--gray); font-size:.93rem; line-height:1.7; margin-bottom:16px; }
+  .reviewer { display:flex; align-items:center; gap:12px; }
+  .reviewer-avatar {
+    width:44px; height:44px; border-radius:50%;
+    background:linear-gradient(135deg,var(--blue),var(--green));
+    display:flex; align-items:center; justify-content:center;
+    color:white; font-weight:700; font-size:1.1rem;
+  }
+  .reviewer strong { font-size:.9rem; color:var(--navy); display:block; }
+  .reviewer span { font-size:.8rem; color:var(--gray); }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">
+    <img src="logo.png" alt="FreshNest" onerror="this.style.display='none'">
+    <span>FreshNest<span style="color:var(--green)">Cleaning</span></span>
+  </div>
+  <div class="nav-links">
+    <a href="#diensten" data-nl>Diensten</a><a href="#diensten" data-en>Services</a>
+    <a href="#waarom-wij" data-nl>Over Ons</a><a href="#waarom-wij" data-en>About Us</a>
+    <a href="#reviews" data-nl>Reviews</a><a href="#reviews" data-en>Reviews</a>
+    <a href="#boeken" data-nl>Boeken</a><a href="#boeken" data-en>Book</a>
+    <a href="#contact" data-nl>Contact</a><a href="#contact" data-en>Contact</a>
+  </div>
+  <div style="display:flex;align-items:center;gap:12px">
+    <button class="lang-btn" onclick="toggleLang()" id="lang-toggle">🌐 EN</button>
+    <a href="#boeken" class="nav-cta" data-nl>Gratis Offerte</a>
+    <a href="#boeken" class="nav-cta" data-en>Free Quote</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-content">
+    <div class="hero-badge">
+      🌿 <span data-nl>Professioneel Schoonmaakbedrijf – Nederland</span><span data-en>Professional Cleaning Company – Netherlands</span>
+    </div>
+    <h1>
+      <span data-nl>Een Frisser Huis,<br><span style="color:var(--green)">Een Beter Leven</span></span>
+      <span data-en>A Fresher Home,<br><span style="color:var(--green)">A Better Life</span></span>
+    </h1>
+    <p data-nl>FreshNest Cleaning biedt professionele, betrouwbare en milieuvriendelijke schoonmaakdiensten voor woningen en bedrijven door heel Nederland. Wij zorgen voor een stralend schoon huis – elke keer opnieuw.</p>
+    <p data-en>FreshNest Cleaning provides professional, reliable and eco-friendly cleaning services for homes and businesses across the Netherlands. We make your home sparkle – every single time.</p>
+    <div class="hero-btns">
+      <a href="#boeken" class="btn-primary">
+        🗓️ <span data-nl>Direct Boeken</span><span data-en>Book Now</span>
+      </a>
+      <a href="#diensten" class="btn-secondary">
+        ✨ <span data-nl>Onze Diensten</span><span data-en>Our Services</span>
+      </a>
+    </div>
+    <div class="trust-bar">
+      <div class="trust-item"><span class="trust-icon">🌿</span> <span data-nl>Eco-vriendelijk</span><span data-en>Eco-friendly</span></div>
+      <div class="trust-item"><span class="trust-icon">⭐</span> <span data-nl>Betrouwbaar</span><span data-en>Reliable</span></div>
+      <div class="trust-item"><span class="trust-icon">🔒</span> <span data-nl>Verzekerd</span><span data-en>Insured</span></div>
+      <div class="trust-item"><span class="trust-icon">📞</span> <span data-nl>24/7 Bereikbaar</span><span data-en>24/7 Support</span></div>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="hero-logo-wrap">
+      <img src="logo.png" alt="FreshNest Cleaning" onerror="this.outerHTML='<div style=\'width:260px;height:260px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:12px\'><div style=\'font-size:5rem\'>🏠</div><div style=\'font-family:Playfair Display,serif;font-size:1.5rem;color:#1a2d5a;font-weight:700\'>FreshNest</div></div>'">
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stat"><div class="stat-num">500+</div><div class="stat-label" data-nl>Tevreden Klanten</div><div class="stat-label" data-en>Happy Clients</div></div>
+  <div class="stat"><div class="stat-num">6</div><div class="stat-label" data-nl>Diensten</div><div class="stat-label" data-en>Services</div></div>
+  <div class="stat"><div class="stat-num">5⭐</div><div class="stat-label" data-nl>Gemiddelde Score</div><div class="stat-label" data-en>Average Rating</div></div>
+  <div class="stat"><div class="stat-num">100%</div><div class="stat-label" data-nl>Tevredenheidsgarantie</div><div class="stat-label" data-en>Satisfaction Guarantee</div></div>
+</div>
+
+<!-- SERVICES -->
+<section id="diensten">
+  <div class="section-header">
+    <div class="section-tag" data-nl>Onze Diensten</div><div class="section-tag" data-en>Our Services</div>
+    <h2 class="section-title" data-nl>Alles Voor Een Schoner &amp; Beter Thuis</h2>
+    <h2 class="section-title" data-en>Everything For A Cleaner &amp; Better Home</h2>
+    <p class="section-sub" data-nl>Van reguliere schoonmaak tot vastgoedbeheer – FreshNest biedt een compleet pakket aan diensten voor u.</p>
+    <p class="section-sub" data-en>From regular cleaning to property management – FreshNest offers a complete package of services for you.</p>
+  </div>
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-icon">🏠</div>
+      <h3 data-nl>Woningschoonmaak</h3><h3 data-en>Home Cleaning</h3>
+      <p data-nl>Regelmatige of eenmalige grondige schoonmaak van uw woning. Van slaapkamers tot badkamers – wij reinigen alles vakkundig.</p>
+      <p data-en>Regular or one-time deep cleaning of your home. From bedrooms to bathrooms – we clean everything professionally.</p>
+      <span class="service-badge" data-nl>Populair</span><span class="service-badge" data-en>Popular</span>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🏢</div>
+      <h3 data-nl>Kantoor &amp; Bedrijf</h3><h3 data-en>Office &amp; Business</h3>
+      <p data-nl>Professionele schoonmaak voor kantoren, winkels en bedrijfsruimtes. Flexibele roosters, ook buiten kantoortijden.</p>
+      <p data-en>Professional cleaning for offices, shops and commercial spaces. Flexible schedules, including outside office hours.</p>
+      <span class="service-badge">B2B</span>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">✨</div>
+      <h3 data-nl>Eind- &amp; Verhuisschoonmaak</h3><h3 data-en>End &amp; Moving Cleaning</h3>
+      <p data-nl>Perfect voor huurders en kopers. Grondige eindschoonmaak die voldoet aan de hoogste normen van verhuurders.</p>
+      <p data-en>Perfect for tenants and buyers. Thorough end-of-tenancy cleaning meeting the highest landlord standards.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🏗️</div>
+      <h3 data-nl>Vastgoedbeheer</h3><h3 data-en>Estate Management</h3>
+      <p data-nl>Volledig beheer van uw vastgoedportefeuille. Onderhoud, inspectie, huurdersbeheer en meer – wij ontzorgen u compleet.</p>
+      <p data-en>Full management of your property portfolio. Maintenance, inspection, tenant management and more – we take care of everything.</p>
+      <span class="service-badge" data-nl>Nieuw</span><span class="service-badge" data-en>New</span>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🛡️</div>
+      <h3 data-nl>Woonverzekering</h3><h3 data-en>Home Insurance</h3>
+      <p data-nl>Wij helpen u de juiste woningverzekering te vinden. Inboedel-, opstal- en aansprakelijkheidsverzekeringen via onze partners.</p>
+      <p data-en>We help you find the right home insurance. Contents, buildings and liability insurance through our partners.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🔑</div>
+      <h3 data-nl>Verkoop &amp; Verhuur Woningen</h3><h3 data-en>House Sales &amp; Leasing</h3>
+      <p data-nl>Op zoek naar uw droomhuis of wilt u uw woning verkopen of verhuren? Ons team begeleidt u door het hele proces.</p>
+      <p data-en>Looking for your dream home or want to sell or rent out your property? Our team guides you through the entire process.</p>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section id="waarom-wij">
+  <div style="max-width:1100px;margin:0 auto">
+  <div class="section-header">
+    <div class="section-tag" data-nl>Waarom FreshNest?</div><div class="section-tag" data-en>Why FreshNest?</div>
+    <h2 class="section-title" data-nl>Uw Betrouwbare Partner in Nederland</h2>
+    <h2 class="section-title" data-en>Your Trusted Partner in the Netherlands</h2>
+  </div>
+  <div class="why-grid">
+    <div class="why-visual">
+      <img src="logo.png" alt="FreshNest" onerror="this.outerHTML='<div style=\'font-size:8rem\'>🏡</div>'">
+      <p style="margin-top:16px;font-family:Playfair Display,serif;font-size:1.2rem;color:var(--navy);font-weight:700" data-nl>"Uw huis, onze zorg."</p>
+      <p style="margin-top:16px;font-family:Playfair Display,serif;font-size:1.2rem;color:var(--navy);font-weight:700" data-en>"Your home, our care."</p>
+    </div>
+    <div class="why-list">
+      <div class="why-item">
+        <div class="why-num">01</div>
+        <div>
+          <h4 data-nl>Gecertificeerde Professionals</h4><h4 data-en>Certified Professionals</h4>
+          <p data-nl>Al ons personeel is gecertificeerd, gescreend en volledig opgeleid voor uitmuntende service.</p>
+          <p data-en>All our staff are certified, screened and fully trained for exceptional service.</p>
+        </div>
+      </div>
+      <div class="why-item">
+        <div class="why-num">02</div>
+        <div>
+          <h4 data-nl>Eco-Vriendelijke Producten</h4><h4 data-en>Eco-Friendly Products</h4>
+          <p data-nl>Wij gebruiken uitsluitend milieuvriendelijke, biologisch afbreekbare schoonmaakmiddelen die veilig zijn voor uw gezin en huisdieren.</p>
+          <p data-en>We exclusively use eco-friendly, biodegradable cleaning products that are safe for your family and pets.</p>
+        </div>
+      </div>
+      <div class="why-item">
+        <div class="why-num">03</div>
+        <div>
+          <h4 data-nl>Volledig Verzekerd</h4><h4 data-en>Fully Insured</h4>
+          <p data-nl>FreshNest is volledig verzekerd. U hoeft zich nooit zorgen te maken over schade of aansprakelijkheid.</p>
+          <p data-en>FreshNest is fully insured. You never have to worry about damage or liability.</p>
+        </div>
+      </div>
+      <div class="why-item">
+        <div class="why-num">04</div>
+        <div>
+          <h4 data-nl>Tevredenheidsgarantie</h4><h4 data-en>Satisfaction Guarantee</h4>
+          <p data-nl>Niet tevreden? Wij komen het oplossen – kosteloos. Uw tevredenheid is onze hoogste prioriteit.</p>
+          <p data-en>Not satisfied? We'll fix it – free of charge. Your satisfaction is our highest priority.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+</section>
+
+<!-- BOOKING FORM -->
+<section id="boeken">
+  <div class="section-header" style="text-align:center">
+    <div class="section-tag" data-nl>Afspraak Maken</div><div class="section-tag" data-en>Make an Appointment</div>
+    <h2 class="section-title" data-nl>Boek Uw Schoonmaak Online</h2>
+    <h2 class="section-title" data-en>Book Your Cleaning Online</h2>
+    <p class="section-sub" style="margin:0 auto" data-nl>Vul het formulier in en wij nemen zo snel mogelijk contact met u op voor bevestiging en een prijsopgave.</p>
+    <p class="section-sub" style="margin:0 auto" data-en>Fill in the form and we will contact you as soon as possible for confirmation and a quote.</p>
+  </div>
+  <div class="form-wrap" style="max-width:780px;margin:0 auto">
+    <form id="booking-form">
+      <div class="form-grid">
+        <!-- Name -->
+        <div class="form-group">
+          <label data-nl>Voornaam *</label><label data-en>First Name *</label>
+          <input type="text" name="voornaam" required placeholder="Jan">
+        </div>
+        <div class="form-group">
+          <label data-nl>Achternaam *</label><label data-en>Last Name *</label>
+          <input type="text" name="achternaam" required placeholder="de Vries">
+        </div>
+        <!-- Contact -->
+        <div class="form-group">
+          <label data-nl>E-mailadres *</label><label data-en>Email Address *</label>
+          <input type="email" name="email" required placeholder="jan@email.nl">
+        </div>
+        <div class="form-group">
+          <label data-nl>Telefoonnummer *</label><label data-en>Phone Number *</label>
+          <input type="tel" name="telefoon" required placeholder="+31 6 12345678">
+        </div>
+        <!-- Address -->
+        <div class="form-group full">
+          <label data-nl>Adres *</label><label data-en>Address *</label>
+          <input type="text" name="adres" required placeholder="Keizersgracht 123, 1015 CJ Amsterdam">
+        </div>
+        <!-- Service -->
+        <div class="form-group">
+          <label data-nl>Gewenste Dienst *</label><label data-en>Desired Service *</label>
+          <select name="dienst" required>
+            <option value="" data-nl>-- Kies een dienst --</option>
+            <option value="" data-en>-- Select a service --</option>
+            <option value="Woningschoonmaak" data-nl>Woningschoonmaak</option>
+            <option value="Home Cleaning" data-en>Home Cleaning</option>
+            <option value="Kantoor & Bedrijf" data-nl>Kantoor &amp; Bedrijf Schoonmaak</option>
+            <option value="Office Cleaning" data-en>Office &amp; Business Cleaning</option>
+            <option value="Eind- & Verhuisschoonmaak" data-nl>Eind- &amp; Verhuisschoonmaak</option>
+            <option value="End & Moving Clean" data-en>End &amp; Moving Cleaning</option>
+            <option value="Vastgoedbeheer" data-nl>Vastgoedbeheer</option>
+            <option value="Estate Management" data-en>Estate Management</option>
+            <option value="Woonverzekering" data-nl>Woonverzekering</option>
+            <option value="Home Insurance" data-en>Home Insurance</option>
+            <option value="Verkoop & Verhuur" data-nl>Verkoop &amp; Verhuur Woningen</option>
+            <option value="Sales & Leasing" data-en>House Sales &amp; Leasing</option>
+          </select>
+        </div>
+        <!-- Date -->
+        <div class="form-group">
+          <label data-nl>Gewenste Datum *</label><label data-en>Preferred Date *</label>
+          <input type="date" name="datum" required>
+        </div>
+        <!-- Space size -->
+        <div class="form-group">
+          <label data-nl>Oppervlakte (m²) *</label><label data-en>Space Size (m²) *</label>
+          <select name="oppervlakte" required>
+            <option value="" data-nl>-- Kies oppervlakte --</option>
+            <option value="" data-en>-- Select size --</option>
+            <option value="Tot 50m²" data-nl>Tot 50 m²</option>
+            <option value="Up to 50m²" data-en>Up to 50 m²</option>
+            <option value="50–100m²" data-nl>50 – 100 m²</option>
+            <option value="50–100m²" data-en>50 – 100 m²</option>
+            <option value="100–200m²" data-nl>100 – 200 m²</option>
+            <option value="100–200m²" data-en>100 – 200 m²</option>
+            <option value="200–500m²" data-nl>200 – 500 m²</option>
+            <option value="200–500m²" data-en>200 – 500 m²</option>
+            <option value="500m² of meer" data-nl>500 m² of meer</option>
+            <option value="500m² or more" data-en>500 m² or more</option>
+          </select>
+        </div>
+        <!-- Rooms -->
+        <div class="form-group">
+          <label data-nl>Aantal Kamers</label><label data-en>Number of Rooms</label>
+          <input type="number" name="kamers" min="1" max="50" placeholder="3">
+        </div>
+        <!-- Frequency -->
+        <div class="form-group">
+          <label data-nl>Frequentie</label><label data-en>Frequency</label>
+          <select name="frequentie">
+            <option value="Eenmalig" data-nl>Eenmalig</option>
+            <option value="One-time" data-en>One-time</option>
+            <option value="Wekelijks" data-nl>Wekelijks</option>
+            <option value="Weekly" data-en>Weekly</option>
+            <option value="Tweewekelijks" data-nl>Tweewekelijks</option>
+            <option value="Bi-weekly" data-en>Bi-weekly</option>
+            <option value="Maandelijks" data-nl>Maandelijks</option>
+            <option value="Monthly" data-en>Monthly</option>
+          </select>
+        </div>
+        <!-- Photo upload -->
+        <div class="form-group full">
+          <label data-nl>Foto's van de Ruimte (optioneel)</label><label data-en>Photos of the Space (optional)</label>
+          <div class="upload-area" id="upload-area">
+            <input type="file" id="photo-upload" name="fotos" multiple accept="image/*" onchange="previewFiles(this)">
+            <div class="upload-icon">📸</div>
+            <p><strong data-nl>Klik om foto's te uploaden</strong><strong data-en>Click to upload photos</strong><br>
+            <span data-nl>of sleep bestanden hierheen • JPG, PNG, WEBP</span>
+            <span data-en>or drag files here • JPG, PNG, WEBP</span></p>
+          </div>
+          <div id="file-preview"></div>
+        </div>
+        <!-- Notes -->
+        <div class="form-group full">
+          <label data-nl>Bijzonderheden / Opmerkingen</label><label data-en>Special Notes / Remarks</label>
+          <textarea name="opmerkingen" placeholder="Bijv: 2 honden aanwezig, sleutel ophalen bij buren..."></textarea>
+        </div>
+        <!-- Submit -->
+        <div class="form-group full">
+          <button type="submit" class="submit-btn">
+            🗓️ <span data-nl>Stuur Aanvraag – Gratis Offerte</span><span data-en>Send Request – Free Quote</span>
+          </button>
+        </div>
+      </div>
+    </form>
+    <!-- Success state -->
+    <div class="form-success" id="form-success">
+      <div class="tick">✅</div>
+      <h3 data-nl>Aanvraag Ontvangen!</h3><h3 data-en>Request Received!</h3>
+      <p data-nl>Bedankt voor uw aanvraag. Wij nemen binnen 24 uur contact met u op om de details te bespreken en een definitieve prijs te bevestigen.</p>
+      <p data-en>Thank you for your request. We will contact you within 24 hours to discuss the details and confirm a final price.</p>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="reviews">
+  <div class="section-header" style="text-align:center">
+    <div class="section-tag" data-nl>Wat Klanten Zeggen</div><div class="section-tag" data-en>What Clients Say</div>
+    <h2 class="section-title" data-nl>Onze Klanten Zijn Dol op FreshNest</h2>
+    <h2 class="section-title" data-en>Our Clients Love FreshNest</h2>
+  </div>
+  <div class="reviews-grid">
+    <div class="review-card">
+      <div class="stars">★★★★★</div>
+      <p data-nl>"FreshNest heeft ons huis volledig getransformeerd. Professioneel, vriendelijk en altijd op tijd. Absoluut aanrader!"</p>
+      <p data-en>"FreshNest completely transformed our home. Professional, friendly and always on time. Absolutely recommended!"</p>
+      <div class="reviewer"><div class="reviewer-avatar">S</div><div><strong>Sophie van den Berg</strong><span>Amsterdam</span></div></div>
+    </div>
+    <div class="review-card">
+      <div class="stars">★★★★★</div>
+      <p data-nl>"De eindschoonmaak was perfect. Onze verhuurder was onder de indruk en we kregen onze volledige borg terug!"</p>
+      <p data-en>"The end-of-tenancy cleaning was perfect. Our landlord was impressed and we got our full deposit back!"</p>
+      <div class="reviewer"><div class="reviewer-avatar">M</div><div><strong>Mark Jansen</strong><span>Rotterdam</span></div></div>
+    </div>
+    <div class="review-card">
+      <div class="stars">★★★★★</div>
+      <p data-nl>"Uitstekende service voor ons kantoor. Flexibele tijden en echt grondig werk. Heel blij met FreshNest!"</p>
+      <p data-en>"Excellent service for our office. Flexible hours and truly thorough work. Very happy with FreshNest!"</p>
+      <div class="reviewer"><div class="reviewer-avatar">L</div><div><strong>Lisa de Groot</strong><span>Utrecht</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" style="background:var(--off)">
+  <div style="max-width:900px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center">
+    <div>
+      <div class="section-tag" data-nl>Contact</div><div class="section-tag" data-en>Contact</div>
+      <h2 class="section-title" data-nl>Neem Contact Op</h2>
+      <h2 class="section-title" data-en>Get In Touch</h2>
+      <p style="color:var(--gray);font-size:.95rem;line-height:1.7;margin-bottom:28px" data-nl>Heeft u vragen? Wij staan altijd voor u klaar. Bel, mail of stuur ons een bericht via het formulier.</p>
+      <p style="color:var(--gray);font-size:.95rem;line-height:1.7;margin-bottom:28px" data-en>Have questions? We're always here for you. Call, email or send us a message via the form.</p>
+      <div style="display:flex;flex-direction:column;gap:16px">
+        <div style="display:flex;gap:12px;align-items:center"><span style="font-size:1.4rem">📍</span><div><strong style="color:var(--navy)" data-nl>Locatie</strong><strong style="color:var(--navy)" data-en>Location</strong><br><span style="color:var(--gray);font-size:.9rem">Nederland</span></div></div>
+        <div style="display:flex;gap:12px;align-items:center"><span style="font-size:1.4rem">📞</span><div><strong style="color:var(--navy)" data-nl>Telefoon</strong><strong style="color:var(--navy)" data-en>Phone</strong><br><a href="tel:+31612345678" style="color:var(--blue);text-decoration:none;font-size:.9rem">+31 6 12 34 56 78</a></div></div>
+        <div style="display:flex;gap:12px;align-items:center"><span style="font-size:1.4rem">🕐</span><div><strong style="color:var(--navy)" data-nl>Openingstijden</strong><strong style="color:var(--navy)" data-en>Opening Hours</strong><br><span style="color:var(--gray);font-size:.9rem" data-nl>Ma–Za: 08:00–20:00</span><span style="color:var(--gray);font-size:.9rem" data-en>Mon–Sat: 08:00–20:00</span></div></div>
+      </div>
+    </div>
+    <div style="background:white;padding:36px;border-radius:20px;box-shadow:var(--shadow)">
+      <form id="contact-form">
+        <div style="display:flex;flex-direction:column;gap:16px">
+          <div class="form-group"><label data-nl>Naam *</label><label data-en>Name *</label><input type="text" required placeholder="Uw naam"></div>
+          <div class="form-group"><label data-nl>E-mail *</label><label data-en>Email *</label><input type="email" required placeholder="uw@email.nl"></div>
+          <div class="form-group"><label data-nl>Bericht *</label><label data-en>Message *</label><textarea required style="min-height:120px" placeholder="Uw bericht..."></textarea></div>
+          <button type="submit" class="submit-btn" data-nl>Verstuur Bericht</button>
+          <button type="submit" class="submit-btn" data-en>Send Message</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer id="footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <img src="logo.png" alt="FreshNest" onerror="this.outerHTML='<div style=\'font-size:3rem;margin-bottom:16px\'>🏠</div>'">
+      <p data-nl>FreshNest Cleaning – Professioneel schoonmaakbedrijf in Nederland. Een frisser huis, een beter leven.</p>
+      <p data-en>FreshNest Cleaning – Professional cleaning company in the Netherlands. A fresher home, a better life.</p>
+    </div>
+    <div>
+      <h4 data-nl>Diensten</h4><h4 data-en>Services</h4>
+      <ul>
+        <li><a href="#boeken" data-nl>Woningschoonmaak</a><a href="#boeken" data-en>Home Cleaning</a></li>
+        <li><a href="#boeken" data-nl>Kantoorschoonmaak</a><a href="#boeken" data-en>Office Cleaning</a></li>
+        <li><a href="#boeken" data-nl>Vastgoedbeheer</a><a href="#boeken" data-en>Estate Management</a></li>
+        <li><a href="#boeken" data-nl>Woonverzekering</a><a href="#boeken" data-en>Home Insurance</a></li>
+        <li><a href="#boeken" data-nl>Verkoop &amp; Verhuur</a><a href="#boeken" data-en>Sales &amp; Leasing</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4 data-nl>Bedrijf</h4><h4 data-en>Company</h4>
+      <ul>
+        <li><a href="#waarom-wij" data-nl>Over Ons</a><a href="#waarom-wij" data-en>About Us</a></li>
+        <li><a href="#reviews" data-nl>Reviews</a><a href="#reviews" data-en>Reviews</a></li>
+        <li><a href="#boeken" data-nl>Offerte Aanvragen</a><a href="#boeken" data-en>Request Quote</a></li>
+        <li><a href="#contact" data-nl>Contact</a><a href="#contact" data-en>Contact</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4 data-nl>Volg Ons</h4><h4 data-en>Follow Us</h4>
+      <div class="social-links" style="justify-content:flex-start">
+        <a href="#" title="Facebook">f</a>
+        <a href="#" title="Instagram">ig</a>
+        <a href="#" title="WhatsApp">w</a>
+      </div>
+      <p style="margin-top:20px;font-size:.85rem" data-nl>📧 Stuur ons een e-mail via het boekingsformulier</p>
+      <p style="margin-top:20px;font-size:.85rem" data-en>📧 Send us an email via the booking form</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 FreshNest Cleaning – <span data-nl>Alle rechten voorbehouden</span><span data-en>All rights reserved</span></p>
+    <p data-nl>🌿 Milieuvriendelijk &nbsp;|&nbsp; 🔒 Verzekerd &nbsp;|&nbsp; ⭐ Gecertificeerd</p>
+    <p data-en>🌿 Eco-Friendly &nbsp;|&nbsp; 🔒 Insured &nbsp;|&nbsp; ⭐ Certified</p>
+  </div>
+</footer>
+
+<!-- TOAST -->
+<div id="toast">✅ <span data-nl>Aanvraag verzonden!</span><span data-en>Request sent!</span></div>
+
+<script>
+// ---- LANGUAGE TOGGLE ----
+let isEnglish = false;
+function toggleLang() {
+  isEnglish = !isEnglish;
+  document.body.classList.toggle('english', isEnglish);
+  document.getElementById('lang-toggle').textContent = isEnglish ? '🌐 NL' : '🌐 EN';
+  document.documentElement.lang = isEnglish ? 'en' : 'nl';
+}
+
+// ---- PHOTO PREVIEW ----
+function previewFiles(input) {
+  const preview = document.getElementById('file-preview');
+  preview.innerHTML = '';
+  Array.from(input.files).forEach(file => {
+    const reader = new FileReader();
+    reader.onload = e => {
+      const img = document.createElement('img');
+      img.src = e.target.result;
+      img.className = 'file-thumb';
+      preview.appendChild(img);
+    };
+    reader.readAsDataURL(file);
+  });
+}
+
+// ---- EMAIL via Formspree (free, routes to specified email without showing it) ----
+// Booking form
+document.getElementById('booking-form').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  const form = this;
+  const btn = form.querySelector('.submit-btn');
+  const origText = btn.innerHTML;
+
+  btn.innerHTML = '⏳ ' + (isEnglish ? 'Sending...' : 'Verzenden...');
+  btn.disabled = true;
+
+  // Collect all form data
+  const data = new FormData(form);
+  const payload = {};
+  data.forEach((v, k) => { if (k !== 'fotos') payload[k] = v; });
+
+  // Build email body for photo info
+  const fileInput = document.getElementById('photo-upload');
+  if (fileInput.files.length > 0) {
+    payload['fotos_aangeleverd'] = fileInput.files.length + ' foto(s) bijgevoegd';
+  }
+
+  // Send via Formspree (replace FORMSPREE_ID with actual endpoint after setup)
+  // For demo: simulate success after 1.5s
+  // In production: use fetch('https://formspree.io/f/YOUR_ID', { method:'POST', body: JSON.stringify(payload), headers:{'Content-Type':'application/json','Accept':'application/json'} })
+
+  try {
+    const res = await fetch('https://formspree.io/f/xvznolje', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({ ...payload, _replyto: payload.email, subject: 'Nieuwe Boeking – FreshNest Cleaning' })
+    });
+    if (!res.ok) throw new Error();
+
+    form.style.display = 'none';
+    document.getElementById('form-success').style.display = 'block';
+    showToast();
+  } catch {
+    btn.innerHTML = origText;
+    btn.disabled = false;
+    alert(isEnglish ? 'Something went wrong. Please try again.' : 'Er is iets misgegaan. Probeer het opnieuw.');
+  }
+});
+
+// Contact form
+document.getElementById('contact-form').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  const btn = this.querySelector('.submit-btn');
+  btn.disabled = true;
+  try {
+    const data = new FormData(this);
+    const payload = {};
+    data.forEach((v,k) => payload[k] = v);
+    const res = await fetch('https://formspree.io/f/xvznolje', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({ ...payload, subject: 'Contactbericht – FreshNest Cleaning' })
+    });
+    if (!res.ok) throw new Error();
+    this.reset();
+    showToast();
+  } catch { alert('Er is iets misgegaan. Probeer opnieuw.'); }
+  btn.disabled = false;
+});
+
+// ---- TOAST ----
+function showToast() {
+  const t = document.getElementById('toast');
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3500);
+}
+
+// ---- SCROLL ANIMATIONS ----
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.style.opacity = '1';
+      e.target.style.transform = 'translateY(0)';
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.service-card, .review-card, .why-item').forEach(el => {
+  el.style.opacity = '0';
+  el.style.transform = 'translateY(24px)';
+  el.style.transition = 'opacity .5s ease, transform .5s ease';
+  observer.observe(el);
+});
+
+// ---- SET MIN DATE ----
+const dateInput = document.querySelector('input[type="date"]');
+if (dateInput) {
+  const today = new Date().toISOString().split('T')[0];
+  dateInput.min = today;
+}
+</script>
+</body>
+</html>
